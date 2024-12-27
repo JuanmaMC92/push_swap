@@ -38,21 +38,23 @@ void    rr(t_stack *a, t_stack *b); // Rotate simultáneo
 void    rra(t_stack *a);       // Reverse Rotate A
 void    rrb(t_stack *b);       // Reverse Rotate B
 void    rrr(t_stack *a, t_stack *b); // Reverse Rotate simultáneo
-
+/*
 // Funciones de ordenamiento
 void    sort_small(t_stack *a, t_stack *b); // Ordenar para menos de 5 elementos
 void    sort_large(t_stack *a, t_stack *b); // Ordenar para muchos elementos
-
+*/
 // Utilidades
 t_stack *create_stack(void);   // Crear una nueva pila
 void    free_stack(t_stack *stack); // Liberar memoria de una pila
 void    push(t_stack *stack, int value); // Añadir un elemento a la pila
 int     pop(t_stack *stack);   // Sacar un elemento de la pila
-bool    is_sorted(t_stack *stack); // Verificar si una pila está ordenada
+void    print_stack(t_stack *stack);
+//bool    is_sorted(t_stack *stack); // Verificar si una pila está ordenada
 
+/*
 // Validación de entrada
 bool    validate_args(int argc, char **argv); // Validar argumentos
 bool    check_duplicates(t_stack *stack);    // Verificar duplicados en la pila
 bool    is_integer(const char *str);         // Verificar si una cadena es un entero
-
+*/
 #endif

@@ -10,19 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../includes/push_swap.h>
+#include "../../includes/push_swap.h"
 
-void    sa(t_stack *a)
+void sa(t_stack *a) 
 {
-return;
+    if (a->size < 2)
+        return; // No se puede hacer swap si hay menos de 2 elementos
+
+    t_node *first = a->top;
+    t_node *second = first->next;
+
+    first->next = second->next;
+    second->next = first;
+    a->top = second; // El segundo nodo ahora es el "top"
 }
 
 void    sb(t_stack *b)
 {
+    if (b->size < 2)
+        return; // No se puede hacer swap si hay menos de 2 elementos
 
+    t_node *first = b->top;
+    t_node *second = first->next;
+
+    first->next = second->next;
+    second->next = first;
+    b->top = second; // El segundo nodo ahora es el "top"
 }
 
 void    ss(t_stack *a, t_stack *b)
 {
-
+    sa(a);
+    sb(b);
 }
