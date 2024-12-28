@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
         return 0;
     
     // Verificar y cargar los argumentos en el stack_a
+    ft_printf("%d,%s\n",argc,argv);
     if (!parse_arguments(argc, argv, &stack_a))
     {
         write(2, "Error\n", 6);  // Escribir mensaje de error en stderr
