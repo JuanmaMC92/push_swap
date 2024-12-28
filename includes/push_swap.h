@@ -6,7 +6,7 @@
 # include <unistd.h>    // Para write
 # include <stdbool.h>   // Para valores booleanos (true/false)
 # include <limits.h>    // Para valores INT_MIN y INT_MAX
-
+# include "../libft/libft.h" 
 
 // Estructura para los nodos de la pila
 typedef struct s_node {

@@ -19,17 +19,24 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRCS = $(shell find . -name "*.c")
 OBJS = $(SRCS:.c=.o)
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
 
-all: $(NAME)
+all: $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR)
+
 clean:
 	rm -f $(OBJS)
+	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
