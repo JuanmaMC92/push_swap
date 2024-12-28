@@ -19,20 +19,12 @@ int main(int argc, char *argv[])
     t_stack *stack_b;
     stack_a=create_stack();
     stack_b=create_stack();
-    int i;
     
     // Comprobar si no hay argumentos
     if (argc == 1)
         return 0;
     
     // Verificar y cargar los argumentos en el stack_a
-    ft_printf("%d\n",argc);
-    i=1;
-    while (argv[i]){
-         ft_printf("%s\n",argv[i]);
-         i++;
-    }   
-
     if (!parse_arguments(argc, argv, stack_a))
     {
         write(2, "Error\n", 6);  // Escribir mensaje de error en stderr

@@ -20,7 +20,6 @@ void    push(t_stack *stack, int value)
     if (!new_node)
         return; 
     new_node->value = value;
-    ft_printf("Adding %d\n",value);
     if(stack->top)
         new_node->next = stack->top;
     stack->top = new_node;

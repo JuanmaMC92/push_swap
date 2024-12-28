@@ -47,7 +47,7 @@ int is_duplicate(t_stack *stack, int num)
     t_node *current;
 
     if (!stack || !stack->top)
-        return (ft_printf("Error: stack or stack->top is NULL\n"),0); 
+        return (0); 
     current = stack->top; 
     while (current)
     {
