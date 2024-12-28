@@ -16,8 +16,10 @@
 t_stack *create_stack()
 {
     t_stack *stack = malloc(sizeof(t_stack));
-    if (!stack)
+    if (!stack){
+        ft_printf("Error: Could not allocate memory for stack\n");
         return NULL; // Manejo de error
+    }
     stack->top = NULL;
     stack->size = 0;
     return stack;

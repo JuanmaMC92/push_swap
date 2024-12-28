@@ -39,7 +39,7 @@ void    free_stack(t_stack *stack);
 void    push(t_stack *stack, int value); 
 int     pop(t_stack *stack);   
 void    print_stack(t_stack *stack);
-int parse_arguments(int argc, char *argv[], t_stack **stack);
+int parse_arguments(int argc, char *argv[], t_stack *stack);
 int is_duplicate(t_stack *stack, int num);
 int is_integer(char *str);
 // Sorting

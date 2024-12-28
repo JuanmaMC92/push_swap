@@ -15,11 +15,14 @@
 
 void    push(t_stack *stack, int value)
 {
-    t_node *new_node = malloc(sizeof(t_node));
+    t_node *new_node;
+    new_node= malloc(sizeof(t_node));
     if (!new_node)
         return; 
     new_node->value = value;
-    new_node->next = stack->top;
+    ft_printf("Adding %d\n",value);
+    if(stack->top)
+        new_node->next = stack->top;
     stack->top = new_node;
     stack->size++;
 }

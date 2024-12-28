@@ -1,0 +1,15 @@
+# Ignorar archivos de objetos generados por la compilación
+*.o
+*.a
+*.so
+
+# Ignorar el archivo ejecutable generado (en tu caso, "push_swap")
+push_swap
+
+# Ignorar directorios de compilación
+obj/
+bin/
+
+# Ignorar archivos temporales o de configuración de editor
+*~   # Archivos temporales de editores como Vim
+.DS_Store   # Archivos específicos de macOS
