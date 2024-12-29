@@ -30,6 +30,7 @@ int is_sorted(t_stack *stack)
 }
 void sort_stack(t_stack **stack_a, t_stack **stack_b)
 {
+    defsort_stack(*stack_a,*stack_b);
     print_stack(*stack_a);
     print_stack(*stack_b);
 }

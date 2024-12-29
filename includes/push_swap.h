@@ -45,6 +45,9 @@ int is_integer(char *str);
 // Sorting
 int is_sorted(t_stack *stack); 
 void sort_stack(t_stack **stack_a, t_stack **stack_b);
+void defsort_stack(t_stack *stack_a, t_stack *stack_b);
+int get_min_move(t_stack *stack, int value, int *sorted);
+void copy_and_sort_stack(t_stack *stack, int **sorted);
 /*
 // Funciones de ordenamiento
 void    sort_small(t_stack *a, t_stack *b); // Ordenar para menos de 5 elementos
