@@ -28,9 +28,32 @@ int is_sorted(t_stack *stack)
     }
     return 1; // Está completamente ordenado
 }
-void sort_stack(t_stack **stack_a, t_stack **stack_b)
+void sort_stack(t_stack *stack_a, t_stack *stack_b,t_log *log)
 {
-    defsort_stack(*stack_a,*stack_b);
-    print_stack(*stack_a);
-    print_stack(*stack_b);
+    while(!is_sorted(stack_a))
+        stack_sort(stack_a,stack_b,log);
+    print_log(log);
+    ft_printf("Sorted:\n");
+    print_stack(stack_a);
+    ft_printf("|A\n");
+}
+void sort_three(t_stack *a,t_stack *b,t_log *log)
+{
+    t_node *current;
+    t_node *last;
+    
+    while(!is_sorted(a))
+    {    
+        current = a->top;
+        last = current->next;
+        while (last->next)
+            last = last->next;
+        if (current->value > current->next->value)
+                sa(a, b,log);
+        else if (last->value < current->value)
+                rra(a, b,log);
+        else 
+                ra(a, b,log);
+    }
+
 }

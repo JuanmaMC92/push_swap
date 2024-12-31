@@ -12,48 +12,63 @@
 
 #include "../../includes/push_swap.h"
 
-void    ra(t_stack *a)
+void rotate(t_stack *stack)
 {
-    if (a->size < 2)
-        return; // No se puede rotar si hay menos de 2 elementos
+    t_node *first;
+    t_node *last;
 
-    t_node *first = a->top;
-    t_node *second = first->next;
+    // Si la pila tiene menos de 2 elementos, no hace falta rotar
+    if (stack->size < 2)
+        return;
 
-    // Encuentra el último nodo
-    t_node *last = first;
-    while (last->next != NULL) {
+    first = stack->top;
+    last = stack->top;
+
+    // Encontrar el último nodo
+    while (last->next)
         last = last->next;
-    }
 
-    // Hacemos la rotación
-    a->top = second;       // El segundo nodo es ahora el "top"
-    last->next = first;          // El último nodo apunta al primer nodo
-    first->next = NULL;          // El primer nodo ahora es el último
+    // Hacer que el último nodo apunte al primero
+    last->next = first;
+
+    // El primer nodo pasa a ser el segundo, actualizando el puntero top
+    stack->top = first->next;
+
+    // El antiguo primer nodo se convierte en el último, así que su next es NULL
+    first->next = NULL;
 }
 
-void    rb(t_stack *b)
+void    ra(t_stack *a, t_stack *b,t_log *log)
 {
-    if (b->size < 2)
-        return; // No se puede rotar si hay menos de 2 elementos
-
-    t_node *first = b->top;
-    t_node *second = first->next;
-
-    // Encuentra el último nodo
-    t_node *last = first;
-    while (last->next != NULL) {
-        last = last->next;
+    rotate(a);
+    if (log)
+        add_step(log,"ra");
+    else
+    {
+        ft_printf("ra:\n");
+        print_stacks(a,b);
     }
-
-    // Hacemos la rotación
-    b->top = second;       // El segundo nodo es ahora el "top"
-    last->next = first;          // El último nodo apunta al primer nodo
-    first->next = NULL;          // El primer nodo ahora es el último
 }
-
-void    rr(t_stack *a, t_stack *b)
+void    rb(t_stack *a, t_stack *b,t_log *log)
 {
-    ra(a);
-    rb(b);
+   rotate(b);
+   if (log)
+        add_step(log,"rb");
+    else
+    {
+        ft_printf("rb:\n");
+        print_stacks(a,b);
+    }
+}
+void    rr(t_stack *a, t_stack *b,t_log *log)
+{
+    rotate(a);
+    rotate(b);
+    if (log)
+        add_step(log,"rr");
+    else
+    {
+        ft_printf("rr:\n");
+        print_stacks(a,b);
+    }
 }

@@ -17,6 +17,8 @@ int main(int argc, char *argv[])
 {
     t_stack *stack_a;
     t_stack *stack_b;
+    t_log *log;
+    log=init_log();
     stack_a=create_stack();
     stack_b=create_stack();
     
@@ -37,7 +39,8 @@ int main(int argc, char *argv[])
 
     // En este ejemplo, llamamos a una función que optimiza las operaciones.
     // Podrías desarrollar tu propio algoritmo de ordenación aquí.
-    sort_stack(&stack_a, &stack_b);
+    sort_stack(stack_a, stack_b,log);
+    
     
     // Liberar memoria de los stacks
     free_stack(stack_a);

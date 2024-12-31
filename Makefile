@@ -15,7 +15,7 @@ NAME = push_swap
 
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -O0 -Wall -Wextra -Werror
 
 SRCS = $(shell find . -name "*.c")
 OBJS = $(SRCS:.c=.o)

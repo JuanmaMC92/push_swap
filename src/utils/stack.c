@@ -36,12 +36,22 @@ void    free_stack(t_stack *stack)
     free(stack);
 }
 
-void print_stack(t_stack *stack) {
-    t_node *current = stack->top;
-    printf("Stack: ");
+void print_stack(t_stack *stack) 
+{
+    t_node *current;
+    current = stack->top;
+    
     while (current) {
-        printf("%d ", current->value);
+        ft_printf("%d ", current->value);
         current = current->next;
     }
-    printf("\n");
+}
+void print_stacks(t_stack *a,t_stack *b)
+{
+    
+    print_stack(a);
+    ft_printf("| A\n");
+    print_stack(b);
+    ft_printf("| B\n");
+
 }
