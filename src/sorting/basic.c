@@ -15,6 +15,7 @@
 int is_sorted(t_stack *stack)
 {
     t_node *current;
+    map_stack(stack);
 
     if (!stack || stack->size <= 1) // Si el stack está vacío o tiene un solo elemento
         return 1;
@@ -22,7 +23,7 @@ int is_sorted(t_stack *stack)
     current = stack->top;
     while (current && current->next)
     {
-        if (current->value > current->next->value)
+        if (current->index> current->next->index)
             return 0; // Encontró un desorden, no está ordenado
         current = current->next;
     }

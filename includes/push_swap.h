@@ -48,7 +48,7 @@ t_stack *create_stack(void);
 t_node *get_second_last(t_stack *stack);
 t_node *get_last(t_stack *stack);  
 void    free_stack(t_stack *stack); 
-void    push(t_stack *stack, int value); 
+void    push(t_stack *stack, int value, int index); 
 int     pop(t_stack *stack);
 void    swap(t_stack *stack);
 void    rotate(t_stack *stack);   
@@ -82,6 +82,7 @@ int best_rotation(t_stack *stack,int position, int bit,int higher);
 int prepare_next(t_stack *stack,int ascending);
 //A-to-B
 void atob(t_stack *a , t_stack *b, t_log *log,int bit);
+void btoa(t_stack *a , t_stack *b, t_log *log);
 int prep_atob(t_stack *a , t_stack *b, t_log *log,int bit);
 int best_atob(t_stack *a ,int bit);
 void push_atob(t_stack *a , t_stack *b, t_log *log,int bit);

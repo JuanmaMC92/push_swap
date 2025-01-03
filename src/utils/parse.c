@@ -23,7 +23,7 @@ int parse_arguments(int argc, char *argv[], t_stack *stack)
         num = ft_atoi(argv[i]);
         if (is_duplicate(stack, num))  // Verifica si el número ya existe en el stack
             return 0;
-        push(stack, num);  // Agrega el número al stack
+        push(stack, num,0);  // Agrega el número al stack
     }
     return 1;
 }
