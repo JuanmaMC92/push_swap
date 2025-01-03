@@ -16,9 +16,10 @@
 t_node *get_last(t_stack *stack)
 {
     t_node *current; // Empieza desde el nodo superior
-    current = stack->top;
-    if (!current) 
+    
+    if (!stack || !stack->top)
         return NULL;    // Si la pila está vacía, retorna NULL
+    current = stack->top;
     while (current->next) {       // Recorre hasta el último nodo
         current = current->next;
     }

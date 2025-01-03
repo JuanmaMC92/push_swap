@@ -14,19 +14,19 @@
 
 int get_bit(int number, int position)
 {
-    if(position<=bit_count(number))
         return (number >> position) & 1;
-    return 0;
 }
 int bit_count(int number)
 {
     int count;
     count=0;
+    ft_printf("Number %d ",number);
     while (number > 0)
     {
         number>>=1;
         count++;  
     }
+    ft_printf("- %d bits\n",count);
     return count;
 }
 int get_max_bits(t_stack *stack)
@@ -34,6 +34,7 @@ int get_max_bits(t_stack *stack)
     t_node *current;
     int max_bits;
     int i;
+    max_bits=0;
     map_stack(stack);
     current=stack->top;
     // Determina el número máximo de bits
@@ -43,6 +44,7 @@ int get_max_bits(t_stack *stack)
             max_bits = i;
         current = current->next;
     }
+    ft_printf("Max %d bits\n",max_bits);
     return max_bits;
 }
 int stackrem(t_stack *stack,int position, int bit)
@@ -55,7 +57,7 @@ int stackrem(t_stack *stack,int position, int bit)
         current=stack->top;
         while (current)
         {
-            if (get_bit(current->index,position) & bit)
+            if (get_bit(current->index,position) == bit)
                 count++;
             current=current->next;
         }

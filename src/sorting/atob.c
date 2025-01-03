@@ -18,6 +18,7 @@ void atob(t_stack *a , t_stack *b, t_log *log,int bit)
 {
     int prep;
     push_atob(a,b,log,bit);
+    
     prep=prepare_next(b,0);
     if (prep)
     {    
@@ -28,30 +29,32 @@ void atob(t_stack *a , t_stack *b, t_log *log,int bit)
         else
             rrb(a,b,log);
     }
+    
 }
 void push_atob(t_stack *a , t_stack *b, t_log *log,int bit)
 {
     if(a->size < 2)
         return;
     if(prep_atob(a,b,log,bit))
-        pa(a,b,log);
+            pb(a,b,log);
     else
         if(best_rotation(a,bit,0,0)) //Rotate
         {
-            if(b->top && b->top->value < get_last(b)->value)//Preparacion de A con rra,comprobar si B necesita un rrb
+            if(b->top && b->top->index < get_last(b)->index)//Preparacion de A con rra,comprobar si B necesita un rrb
                 rrr(a,b,log);
             else
                 rra(a,b,log);
         }
         else
         {//If next valid (now first), move
-            if(b->top && b->top->value > get_last(b)->value) //Rotation preferred
+            if(b->top && b->top->index> get_last(b)->index) //Rotation preferred
                 rr(a,b,log);
-            else if(b->top && b->top->next && b->top->value < b->top->next->value)
+            else if(b->top && b->top->next && b->top->index < b->top->next->index)
                 ss(a,b,log);
             else
                 ra(a,b,log);
         }
+    return;
 }
 int prep_atob(t_stack *a , t_stack *b, t_log *log,int bit)
 {
@@ -63,7 +66,7 @@ int prep_atob(t_stack *a , t_stack *b, t_log *log,int bit)
     {
         if(a_move>2) // Last value, rra
         {//Si el ultimo valor (ahora el primero) es valido, mover
-            if(b->top && b->top->value < get_last(b)->value)//Preparacion de A con rra,comprobar si B necesita un rrb
+            if(b->top && b->top->index < get_last(b)->index)//Preparacion de A con rra,comprobar si B necesita un rrb
                 rrr(a,b,log);
             else
                 rra(a,b,log);
@@ -77,22 +80,21 @@ int prep_atob(t_stack *a , t_stack *b, t_log *log,int bit)
             else
                 ra(a,b,log);
         }
-        a_move=best_atob(a,bit); 
     }
-    return a_move;
+    return best_atob(a,bit)>0;
 }
 int best_atob(t_stack *a ,int bit)
 {
     //Comprobar cual es el mejor valor - 0:Ninguno, 1:Primero,2:Siguiente, 3:Ultimo
     int next;
     int last;
-    if(!get_bit(a->top->index,bit)==0)
+    if(get_bit(a->top->index,bit))
     {
-        next=a->top->next ? a->top->index : INT_MAX;
+        next=a->top->next ? a->top->next->index : INT_MAX;
         last=get_last(a) ? get_last(a)->index : INT_MAX;
-        if(get_bit(next,bit)==0)
+        if(!get_bit(next,bit))
         {
-            if(get_bit(last,bit)==0)
+            if(!get_bit(last,bit))
                 return(next>last)+2;//Los dos son validos, si es el ultimo devuelve 3 
             return 2;//Siguiente valor (2)
         }

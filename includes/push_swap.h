@@ -85,7 +85,7 @@ void atob(t_stack *a , t_stack *b, t_log *log,int bit);
 int prep_atob(t_stack *a , t_stack *b, t_log *log,int bit);
 int best_atob(t_stack *a ,int bit);
 void push_atob(t_stack *a , t_stack *b, t_log *log,int bit);
-
+void codestop();
 
 
 /*

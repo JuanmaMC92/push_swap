@@ -57,3 +57,14 @@ int is_duplicate(t_stack *stack, int num)
     }
     return 0;
 }
+void codestop()
+{
+    char c;
+    printf("---Stop--\n");
+    
+    // Espera hasta que se presione Enter (codigo de tecla '\n')
+    do {
+        c = getchar();
+    } while (c != '\n');
+    return;
+}

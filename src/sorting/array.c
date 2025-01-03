@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <limits.h> 
 
-int *stack2array(t_stack *stack) 
+int *stack2array(t_stack *stack)
 {
     int i;
     int *array;
@@ -28,6 +28,7 @@ int *stack2array(t_stack *stack)
         return NULL; // Devuelve NULL si la memoria no pudo ser asignada
 
     current = stack->top;
+    i=0;
     while(i<stack->size)
     {
         array[i] = current->value; // Copia el valor del nodo actual al arreglo
@@ -38,7 +39,7 @@ int *stack2array(t_stack *stack)
     return array; // Devuelve el arreglo
 }
 
-void quicksort(int *array, int size) 
+void quicksort(int *array, int size)
 {
     int pivot;
     int i; 
@@ -74,6 +75,10 @@ void quicksort(int *array, int size)
     // Ordenar recursivamente las dos mitades
     quicksort(array, partition_index);                  // Izquierda del pivote
     quicksort(array + partition_index + 1, size - partition_index - 1); // Derecha del pivote
+    for (int i = 0; i < size; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
 }
 
 void map_stack(t_stack *stack)
@@ -82,6 +87,7 @@ void map_stack(t_stack *stack)
     int i;
     t_node *current;
     array=stack2array(stack);
+    quicksort(array,stack->size);
     if(array)
     {   
         current=stack->top;
@@ -93,6 +99,7 @@ void map_stack(t_stack *stack)
                 if(current->value==array[i])
                 {
                     current->index =i;
+                    ft_printf("%d - %d \n",current->value,current->index);
                     break;
                 }
                 i++;
@@ -100,31 +107,5 @@ void map_stack(t_stack *stack)
             current=current->next;
         }
     }
-}
-
-int find_median(t_stack *stack)
-{
-    int *array;  // Declaración de puntero para el arreglo
-    int median;  // Declaración de la variable para la mediana
-
-    if (!stack || stack->size == 0) {
-        return INT_MIN; // Retorna un valor especial en caso de error
-    }
-
-    // Convierte la pila a un arreglo
-    array = stack2array(stack);
-    if (!array) {
-        return INT_MIN; // Error al convertir
-    }
-
-    // Ordena el arreglo
-    quicksort(array, stack->size);
-
-    // Encuentra el valor medio
-    median = array[stack->size / 2];
-
-    // Libera el arreglo
     free(array);
-
-    return median;
 }
