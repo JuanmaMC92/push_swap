@@ -12,6 +12,7 @@
 typedef struct s_node {
     int value;                 // Valor del nodo
     struct s_node *next;       // Puntero al siguiente nodo
+    int index;
 } t_node;
 
 typedef struct s_step {
@@ -43,7 +44,9 @@ void    rrb(t_stack *a, t_stack *b,t_log *log);       // Reverse Rotate B
 void    rrr(t_stack *a, t_stack *b,t_log *log); // Reverse Rotate simultáneo
 
 // Utils
-t_stack *create_stack(void);  
+t_stack *create_stack(void);
+t_node *get_second_last(t_stack *stack);
+t_node *get_last(t_stack *stack);  
 void    free_stack(t_stack *stack); 
 void    push(t_stack *stack, int value); 
 int     pop(t_stack *stack);
@@ -62,17 +65,28 @@ void print_log(t_log *log);
 
 // Sorting
 int is_sorted(t_stack *stack); 
-void sort_stack(t_stack *stack_a, t_stack *stack_b,t_log *log);
+void sort_stack(t_stack *a, t_stack *b,t_log *log);
 void stack_sort(t_stack *a, t_stack *b,t_log *log);
+void sort_three(t_stack *a,t_stack *b,t_log *log);
 int *stack2array(t_stack *stack);
 void quicksort(int *array, int size);
-int find_median(t_stack *stack);
-void sort_three(t_stack *a,t_stack *b,t_log *log);
-void move_to_top(t_stack *a,t_stack *b, int value,t_log *log);
-int find_candidate(t_stack *a, int median) ;
-int has_values_below_median(t_stack *a, int median);
-void sort_temp(t_stack *a,t_stack *b,t_log *log);
-void send2temp(t_stack *a,t_stack *b,t_log *log,int value);
+void map_stack(t_stack *stack);
+//Bits
+int get_bit(int number, int position);
+int get_max_bits(t_stack *stack);
+int bit_count(int number);
+int stackrem(t_stack *stack,int position, int bit);
+//Optimization
+void radix_sort(t_stack *a,t_stack *b,t_log *log);
+int best_rotation(t_stack *stack,int position, int bit,int higher);
+int prepare_next(t_stack *stack,int ascending);
+//A-to-B
+void atob(t_stack *a , t_stack *b, t_log *log,int bit);
+int prep_atob(t_stack *a , t_stack *b, t_log *log,int bit);
+int best_atob(t_stack *a ,int bit);
+void push_atob(t_stack *a , t_stack *b, t_log *log,int bit);
+
+
 
 /*
 // Funciones de ordenamiento

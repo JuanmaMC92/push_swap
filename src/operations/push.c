@@ -20,6 +20,7 @@ void    push(t_stack *stack, int value)
     if (!new_node)
         return; 
     new_node->value = value;
+    new_node->index=0;
     if(stack->top)
         new_node->next = stack->top;
     stack->top = new_node;
@@ -27,10 +28,13 @@ void    push(t_stack *stack, int value)
 }
 int pop(t_stack *stack)
 {
+    t_node *temp ;
+    int value;
     if (stack->size == 0)
         return -1; // Error: stack vacío
-    t_node *temp = stack->top;
-    int value = temp->value;
+    
+    temp = stack->top;
+    value = temp->value;
     stack->top = temp->next;
     free(temp);
     stack->size--;

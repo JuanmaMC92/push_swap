@@ -28,14 +28,22 @@ int is_sorted(t_stack *stack)
     }
     return 1; // Está completamente ordenado
 }
-void sort_stack(t_stack *stack_a, t_stack *stack_b,t_log *log)
+void sort_stack(t_stack *a, t_stack *b,t_log *log)
 {
-    while(!is_sorted(stack_a))
-        stack_sort(stack_a,stack_b,log);
+    while(!is_sorted(a))
+        stack_sort(a,b,log);
     print_log(log);
     ft_printf("Sorted:\n");
-    print_stack(stack_a);
+    print_stack(a);
     ft_printf("|A\n");
+}
+void stack_sort(t_stack *a, t_stack *b,t_log *log)
+{
+    ///Main sorting algorithm
+    if(a->size>3)
+        radix_sort(a,b,log);
+    else
+        sort_three(a,b,log);
 }
 void sort_three(t_stack *a,t_stack *b,t_log *log)
 {
@@ -49,11 +57,11 @@ void sort_three(t_stack *a,t_stack *b,t_log *log)
         while (last->next)
             last = last->next;
         if (current->value > current->next->value)
-                sa(a, b,log);
+                sa(a, b, log);
         else if (last->value < current->value)
-                rra(a, b,log);
+                rra(a, b, log);
         else 
-                ra(a, b,log);
+                ra(a, b, log);
     }
 
 }

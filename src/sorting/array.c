@@ -76,6 +76,31 @@ void quicksort(int *array, int size)
     quicksort(array + partition_index + 1, size - partition_index - 1); // Derecha del pivote
 }
 
+void map_stack(t_stack *stack)
+{
+    int *array;
+    int i;
+    t_node *current;
+    array=stack2array(stack);
+    if(array)
+    {   
+        current=stack->top;
+        while(current)
+        {
+            i=0;
+            while(i < stack->size)
+            {    
+                if(current->value==array[i])
+                {
+                    current->index =i;
+                    break;
+                }
+                i++;
+            }
+            current=current->next;
+        }
+    }
+}
 
 int find_median(t_stack *stack)
 {
