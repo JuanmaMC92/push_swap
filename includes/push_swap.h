@@ -30,7 +30,7 @@ typedef struct s_stack {
     int size;                  // Tamaño actual de la pila
 } t_stack;
 
-// Operatios
+// Operations
 void    sa(t_stack *a, t_stack *b,t_log *log);        // Swap para la pila A
 void    sb(t_stack *a, t_stack *b,t_log *log);        // Swap para la pila B
 void    ss(t_stack *a, t_stack *b,t_log *log); // Swap simultáneo
