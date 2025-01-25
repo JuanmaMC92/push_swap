@@ -81,31 +81,4 @@ void quicksort(int *array, int size)
     printf("\n");
 }
 
-void map_stack(t_stack *stack)
-{
-    int *array;
-    int i;
-    t_node *current;
-    array=stack2array(stack);
-    quicksort(array,stack->size);
-    if(array)
-    {   
-        current=stack->top;
-        while(current)
-        {
-            i=0;
-            while(i < stack->size)
-            {    
-                if(current->value==array[i])
-                {
-                    current->index =i;
-                    ft_printf("%d - %d \n",current->value,current->index);
-                    break;
-                }
-                i++;
-            }
-            current=current->next;
-        }
-    }
-    free(array);
-}
+

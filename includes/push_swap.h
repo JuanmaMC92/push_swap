@@ -62,12 +62,14 @@ t_log *init_log();
 void clean_log(t_log *log);
 void add_step(t_log *log, char *step);
 void print_log(t_log *log);
-
+int intake (int argc, char **args, t_stack *stack);
+int stack_transfer(char **args, t_stack *stack);
 // Sorting
 int is_sorted(t_stack *stack); 
 void sort_stack(t_stack *a, t_stack *b,t_log *log);
 void stack_sort(t_stack *a, t_stack *b,t_log *log);
 void sort_three(t_stack *a,t_stack *b,t_log *log);
+void sort_five(t_stack *a, t_stack *b, t_log *log);
 int *stack2array(t_stack *stack);
 void quicksort(int *array, int size);
 void map_stack(t_stack *stack);

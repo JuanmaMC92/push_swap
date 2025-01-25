@@ -15,7 +15,6 @@
 int is_sorted(t_stack *stack)
 {
     t_node *current;
-    map_stack(stack);
 
     if (!stack || stack->size <= 1) // Si el stack está vacío o tiene un solo elemento
         return 1;
@@ -31,38 +30,67 @@ int is_sorted(t_stack *stack)
 }
 void sort_stack(t_stack *a, t_stack *b,t_log *log)
 {
-    while(!is_sorted(a))
+    if(!is_sorted(a) && a->size>1)
         stack_sort(a,b,log);
     print_log(log);
-    ft_printf("Sorted:\n");
+    ft_printf("<<%s>>\n",is_sorted(a)?"Sorted successfully":"Unable to sort");
     print_stack(a);
     ft_printf("|A\n");
 }
 void stack_sort(t_stack *a, t_stack *b,t_log *log)
 {
     ///Main sorting algorithm
-    if(a->size>3)
-        radix_sort(a,b,log);
-    else
+    if (a->size==2)
+        sa(a,b,log);
+    else if (a->size<4)
         sort_three(a,b,log);
+    
+    else if (a->size<6)
+        sort_five(a,b,log);
+    /*
+    else
+        proc_stack(a,b,log);
+        */
 }
 void sort_three(t_stack *a,t_stack *b,t_log *log)
 {
-    t_node *current;
-    t_node *last;
+    int head;
+    int next;
+    int last;
     
-    while(!is_sorted(a))
-    {    
-        current = a->top;
-        last = current->next;
-        while (last->next)
-            last = last->next;
-        if (current->value > current->next->value)
-                sa(a, b, log);
-        else if (last->value < current->value)
-                rra(a, b, log);
-        else 
-                ra(a, b, log);
-    }
 
+    while(!is_sorted(a))
+    {// Options( 1-3-2 : 2-1-3 : 3-2-1 : 2-3-1 : 3-1-2 )
+        head=a->top->index;
+        next=a->top->next->index;
+        last=get_last(a)->index;
+        if(head>next)
+        {//2-1-3 : 3-2-1 : 3-1-2
+            if(head>last)//3-2-1 -> 2-1-3 : 3-1-2 -> 1-2-3 (o)
+                ra(a,b,log);
+            else//2-1-3 -> 1-2-3 (o)
+                sa(a,b,log);
+        }
+        else//1-3-2 -> 2-1-3 : 2-3-1 -> 1-2-3 (o)
+            rra(a,b,log);
+    }
+}
+void sort_five(t_stack *a, t_stack *b, t_log *log)
+{
+    ft_printf("Sort-five Strategy-%d\n",a->size);
+    while (a->size > 3) // Mover los dos elementos más pequeños a B
+    {
+        ft_printf("Top item:%d(%d)\n",a->top->value,a->top->index);
+        if (a->top->index <2)
+            pb(a, b, log); // Push mínimo a stack B
+        else
+            ra(a, b, log); // Rotate hasta encontrar los mínimos
+        //ft_printf("A size-%d\n",a->size);
+    }
+    sort_three(a, b, log); // Ordenar los tres elementos restantes
+    ft_printf("A sorted, return from B\n");
+    if(is_sorted(b))
+        sb(a, b, log); 
+    while(b->size>0)
+        pa(a, b, log); // Reinsertar elementos de B
 }
