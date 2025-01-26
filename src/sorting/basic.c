@@ -22,8 +22,8 @@ int is_sorted(t_stack *stack)
     current = stack->top;
     while (current && current->next)
     {
-        if (current->index> current->next->index)
-            return 0; // Encontró un desorden, no está ordenado
+        if (current->index > current->next->index)
+            return (ft_printf("Node:%d(%d) > Next: %d (%d)\n",current->value,current->index,current->next->value,current->next->index),0); // Encontró un desorden, no está ordenado
         current = current->next;
     }
     return 1; // Está completamente ordenado
@@ -47,10 +47,11 @@ void stack_sort(t_stack *a, t_stack *b,t_log *log)
     
     else if (a->size<6)
         sort_five(a,b,log);
-    /*
+    
     else
-        proc_stack(a,b,log);
-        */
+        //proc_stack(a,b,log);
+        proc_radix(a,b,log);
+        
 }
 void sort_three(t_stack *a,t_stack *b,t_log *log)
 {

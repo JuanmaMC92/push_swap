@@ -59,6 +59,7 @@ void radix_sort(t_stack *a,t_stack *b,t_log *log)
     }
 }
 
+
 int prepare_next(t_stack *stack,int ascending)
 {
     int current;

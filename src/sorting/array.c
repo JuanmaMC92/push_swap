@@ -39,22 +39,17 @@ int *stack2array(t_stack *stack)
     return array; // Devuelve el arreglo
 }
 
-void quicksort(int *array, int size)
+int partition(int *array, int size)
 {
     int pivot;
-    int i; 
-    int j;
-    int temp; 
-    int partition_index; // Declarar todas las variables al inicio
-
-    if (size < 2)
-        return; // Caso base: si el tamaño es 1 o menos, ya está ordenado
-
+    int i;                  // Índice para los elementos menores
+    int j;                   // Índice para recorrer el arreglo
+    int temp;
     pivot = array[size - 1]; // Elegir el pivote
-    i = -1;                  // Inicializar índice para los elementos menores
-    j = 0;                   // Inicializar índice para iterar el arreglo
-
-    while (j < size - 1) { // Iterar por los elementos antes del pivote
+    i = -1;
+    j = 0;
+    // Mover los elementos menores que el pivote al lado izquierdo
+    while (j < size - 1) {
         if (array[j] < pivot) {
             i++;
             // Intercambiar array[i] y array[j]
@@ -65,20 +60,30 @@ void quicksort(int *array, int size)
         j++;
     }
 
-    // Colocar el pivote en su posición correcta
+    // Colocar el pivote en su lugar correcto
     temp = array[i + 1];
     array[i + 1] = array[size - 1];
     array[size - 1] = temp;
+    return i + 1; // Retorna el índice del pivote
+}
+void quicksort(int *array, int size)
+{
+    int part_index; // Declarar todas las variables al inicio
 
-    partition_index = i + 1;
+    if (size < 2)
+        return; // Caso base: si el tamaño es 1 o menos, ya está ordenado
+    // Dividir el arreglo y obtener el índice del pivote
+    part_index = partition(array, size);
 
     // Ordenar recursivamente las dos mitades
-    quicksort(array, partition_index);                  // Izquierda del pivote
-    quicksort(array + partition_index + 1, size - partition_index - 1); // Derecha del pivote
+    quicksort(array, part_index);                  // Izquierda del pivote
+    quicksort(array + part_index + 1, size - part_index - 1); // Derecha del pivote
+    /*
     for (int i = 0; i < size; i++) {
         printf("%d ", array[i]);
     }
     printf("\n");
+    */
 }
 
 

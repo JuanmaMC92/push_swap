@@ -72,7 +72,9 @@ void sort_three(t_stack *a,t_stack *b,t_log *log);
 void sort_five(t_stack *a, t_stack *b, t_log *log);
 int *stack2array(t_stack *stack);
 void quicksort(int *array, int size);
+int partition(int *array, int size);
 void map_stack(t_stack *stack);
+int max_index(t_stack *stack);
 //Bits
 int get_bit(int number, int position);
 int get_max_bits(t_stack *stack);
@@ -80,8 +82,10 @@ int bit_count(int number);
 int stackrem(t_stack *stack,int position, int bit);
 //Optimization
 void radix_sort(t_stack *a,t_stack *b,t_log *log);
+void proc_radix(t_stack *a,t_stack*b,t_log *log);
 int best_rotation(t_stack *stack,int position, int bit,int higher);
 int prepare_next(t_stack *stack,int ascending);
+
 //A-to-B
 void atob(t_stack *a , t_stack *b, t_log *log,int bit);
 void btoa(t_stack *a , t_stack *b, t_log *log);
