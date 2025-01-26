@@ -83,6 +83,8 @@ int stackrem(t_stack *stack,int position, int bit);
 //Optimization
 void radix_sort(t_stack *a,t_stack *b,t_log *log);
 void proc_radix(t_stack *a,t_stack*b,t_log *log);
+void radix_btoa(t_stack *a,t_stack *b,t_log *log,int bit,int max_bits);
+int restore_rot(int ra_count,int ra_rem);
 int best_rotation(t_stack *stack,int position, int bit,int higher);
 int prepare_next(t_stack *stack,int ascending);
 

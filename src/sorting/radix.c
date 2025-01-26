@@ -13,55 +13,91 @@
 #include "../../includes/push_swap.h"
 
 void proc_radix(t_stack *a,t_stack*b,t_log *log)
-{
-    
-    int mask;
-    
+{    
     t_node *current;
-    
-    mask=1;
-
     int bit;
-    int num;
+    int rot;// Not used
     int size;
     int bit_count;
 
-    size=a->size;
-    num=size-1; 
+    size=a->size; 
     bit_count=0;
-    while((num>>bit_count)!=0)
+    while(((size-1)>>bit_count)!=0)
         bit_count++;
-    //bit_count=get_max_bits(a);
     bit=0;
     while(bit < bit_count)
     {
         //while(stackrem(a,bit,!mask))
         size=a->size;
-        while(size--)
+        rot=0;// Not used
+        while(size-- && !is_sorted(a))
         {
             current=a->top;
-            if(get_bit(current->index,bit)== mask)
+            if(get_bit(current->index,bit)== 1)
             {
                 ra(a,b,log);
-                //current=b->top;
-                //if(current->next && current->index > current->next->index)
-                //  sb(a,b,log);
+                rot++; // Not used
             } 
             else
+            {
                 pb(a,b,log);
-            
-                            
+            }            
         }
         ft_printf("%d bit:\n",bit);
+        ft_printf("Rotations:%d\n Remaining: %d\n",rot,size);
+        /*
+        if(size>0 && rot<size){
+            rot++;
+            while(rot--)
+                rra(a,b,log);
+        }else if(size>0 && rot>=size){
+            size++;
+            while(size--){
+                ra(a,b,log);
+            }
+        }
+        */
+
+
+
         ft_printf("A to B\n");
         print_stacks(a,b);
+        //radix_btoa(a,b,log,bit+1,bit_count);
         while(b->size>0)
         {
             pa(a,b,log);
-            //current=a->top;
-            //if(current->next && current->index > current->next->index)
-            //    sa(a,b,log);
         }
         bit++;
     }
+}
+
+int restore_rot(int ra_count,int ra_rem)
+{
+    return (ra_count<=ra_rem);
+}
+
+void radix_btoa(t_stack *a,t_stack *b,t_log *log,int bit,int max_bits)
+{
+    int size;
+    size=b->size;
+    if(is_sorted(a))
+    {
+        while(b->size>0)
+            pa(a,b,log);
+    }
+    else
+    {
+        while(size-- && bit<=max_bits)
+        {
+            if(get_bit(b->top->index,bit)==1)
+            {
+                rb(a,b,log);
+            }
+            else
+                pa(a,b,log);
+       }
+    }
+    
+    
+        
 }
