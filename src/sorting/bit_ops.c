@@ -16,6 +16,11 @@ int get_bit(int number, int position)
 {
         return (number >> position) & 1;
 }
+int get_bits(int number, int position, int count)
+{
+    // Obtén `count` bits desde la posición `position`
+    return (number >> position) & ((1 << count) - 1);
+}
 int bit_count(int number)
 {
     int count;

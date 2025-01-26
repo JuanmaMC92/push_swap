@@ -77,14 +77,18 @@ void map_stack(t_stack *stack);
 int max_index(t_stack *stack);
 //Bits
 int get_bit(int number, int position);
+int get_bits(int number, int position, int count);
 int get_max_bits(t_stack *stack);
 int bit_count(int number);
 int stackrem(t_stack *stack,int position, int bit);
 //Optimization
 void radix_sort(t_stack *a,t_stack *b,t_log *log);
 void proc_radix(t_stack *a,t_stack*b,t_log *log);
+void proc_radix_2bits(t_stack *a, t_stack *b, t_log *log);
 void radix_btoa(t_stack *a,t_stack *b,t_log *log,int bit,int max_bits);
 int restore_rot(int ra_count,int ra_rem);
+void sync_rot(t_stack *a,t_stack *b,t_log *log,int dir);
+int opt_rot(t_stack *a,int position);
 int best_rotation(t_stack *stack,int position, int bit,int higher);
 int prepare_next(t_stack *stack,int ascending);
 
