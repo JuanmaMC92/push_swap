@@ -68,6 +68,8 @@ void proc_radix(t_stack *a,t_stack*b,t_log *log)
             pa(a,b,log);
         }
         bit++;
+        if(is_sorted(a))
+            break;
     }
 }
 

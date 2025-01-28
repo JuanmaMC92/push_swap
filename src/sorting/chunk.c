@@ -72,3 +72,45 @@ void chunk_sort(t_stack *a, t_stack *b,t_log *log)
     chunk_split(a,b,log,chunk_size);
     chunk_merge(a,b,log);
 }
+void proc_chunk_radix(t_stack *a, t_stack *b,t_log *log)
+{
+    int msb;
+    int size;
+    int bit;
+    int index;
+
+    msb=get_max_bits(a);
+    
+    
+    bit=msb-1;
+    while(bit>0)
+    {
+        size=a->size;
+        while(size--)
+        {
+            index=a->top->index;
+            if (((index>>bit)&1) == 0)
+                pb(a, b, log);
+            else
+                ra(a, b, log);
+        }
+        bit--;
+    }
+    bit=0;
+    while(bit<msb)
+    {
+        size=b->size;
+        while(size--)
+        {
+            index=b->top->index;
+            if (((index>>bit)&1) == 0)
+                pa(a, b, log);
+            else
+                rb(a, b, log); 
+        }
+        bit++;
+    
+    }
+    while (b->size > 0)
+        pa(a,b,log);
+}

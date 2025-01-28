@@ -52,8 +52,8 @@ void stack_sort(t_stack *a, t_stack *b,t_log *log)
         //proc_stack(a,b,log);
         //proc_radix(a,b,log);
         //proc_radix_2bits(a,b,log);
-        chunk_sort(a,b,log);
-        
+        //proc_chunk_radix(a,b,log);
+        proc_best_friend(a,b,log);
 }
 void sort_three(t_stack *a,t_stack *b,t_log *log)
 {
@@ -80,11 +80,12 @@ void sort_three(t_stack *a,t_stack *b,t_log *log)
 }
 void sort_five(t_stack *a, t_stack *b, t_log *log)
 {
+    int i;
     ft_printf("Sort-five Strategy-%d\n",a->size);
     while (a->size > 3) // Mover los dos elementos más pequeños a B
     {
         ft_printf("Top item:%d(%d)\n",a->top->value,a->top->index);
-        if (a->top->index <2)
+        if (a->top->index ==min_index(a))
             pb(a, b, log); // Push mínimo a stack B
         else
             ra(a, b, log); // Rotate hasta encontrar los mínimos
@@ -94,6 +95,7 @@ void sort_five(t_stack *a, t_stack *b, t_log *log)
     ft_printf("A sorted, return from B\n");
     if(is_sorted(b))
         sb(a, b, log); 
-    while(b->size>0)
+    i=2;
+    while(i--)
         pa(a, b, log); // Reinsertar elementos de B
 }
