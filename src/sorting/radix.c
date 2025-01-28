@@ -115,6 +115,74 @@ void sync_rot(t_stack *a,t_stack *b,t_log *log,int dir)
             rra(a,b,log);
     }
 }
+void proc_2bit_radix(t_stack *a, t_stack *b, t_log *log)
+{
+    int bit;
+    int bit_count;
+    int size;
+    int group;
+    size = a->size;
+    bit_count = 0;
+    while (((size - 1) >> bit_count) != 0)
+        bit_count++;
+
+    bit = 0;
+    while (bit < bit_count) 
+    {
+        size = a->size;
+        while(size-- && !is_sorted(a))
+        {
+            group=(a->top->index>>bit)&3;
+            
+            if(group<2)
+                {
+                    pb(a,b,log);
+                    if(group==1 && b->size>1)
+                        rb(a,b,log);
+                }
+            else
+                sync_rot(a,b,log,1);
+        }
+        ft_printf("Processing bits %d-%d:\n", bit, bit + 1);
+        print_stacks(a, b);
+        /*
+       while (b->size>0)
+       {
+        pa(a,b,log);
+        if(b->size>1)
+            {
+                rrb(a,b,log);
+                pa(a,b,log);
+            }
+       }
+       */
+       while (b->size>0)
+       {
+        if(b->size>1)
+            rb(a,b,log);
+        pa(a,b,log);
+       }
+
+
+        //radix_btoa(a,b,log,bit);
+        bit+=2;
+    }
+}
+void radix_btoa(t_stack *a,t_stack *b,t_log *log, int bit)
+{
+    int size;
+    size=b->size;
+    while(size--)
+    {
+        if(((b->top->index>>bit)&3) == 1)
+            pa(a,b,log);
+        else
+            rb(a,b,log);
+    }
+    while(b->size>0)
+        pa(a,b,log);        
+}
+
 
 void proc_radix_2bits(t_stack *a, t_stack *b, t_log *log)
 {
@@ -165,28 +233,4 @@ void proc_radix_2bits(t_stack *a, t_stack *b, t_log *log)
     }
 }
 
-void radix_btoa(t_stack *a,t_stack *b,t_log *log,int bit,int max_bits)
-{
-    int size;
-    size=b->size;
-    if(is_sorted(a))
-    {
-        while(b->size>0)
-            pa(a,b,log);
-    }
-    else
-    {
-        while(size-- && bit<=max_bits)
-        {
-            if(get_bit(b->top->index,bit)==1)
-            {
-                rb(a,b,log);
-            }
-            else
-                pa(a,b,log);
-       }
-    }
-    
-    
-        
-}
+
