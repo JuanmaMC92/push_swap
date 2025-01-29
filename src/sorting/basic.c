@@ -53,7 +53,7 @@ void stack_sort(t_stack *a, t_stack *b,t_log *log)
         //proc_radix(a,b,log);
         //proc_radix_2bits(a,b,log);
         //proc_chunk_radix(a,b,log);
-        proc_best_friend(a,b,log);
+        proc_btoa(a,b,log);
 }
 void sort_three(t_stack *a,t_stack *b,t_log *log)
 {

@@ -105,6 +105,14 @@ void sync_rot(t_stack *a,t_stack *b,t_log *log,int dir);
 int opt_rot(t_stack *a,int position);
 int best_rotation(t_stack *stack,int position, int bit,int higher);
 int prepare_next(t_stack *stack,int ascending);
+void proc_btoa(t_stack *a, t_stack *b, t_log *log);
+void exec_btoa(t_stack *a,t_stack *b,t_log *log,int target,int link);
+int near_high(t_stack *stack,int target);
+int moves2top(t_stack *stack,int target);
+int locate(t_stack *stack,int index);
+int nxt_btoa(t_stack *a,t_stack *b);
+int btoa_ops(t_stack *a,t_stack *b,int link,int target);
+
 
 //A-to-B
 void atob(t_stack *a , t_stack *b, t_log *log,int bit);
