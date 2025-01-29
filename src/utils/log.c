@@ -28,7 +28,8 @@ void clean_log(t_log *log)
 {
     t_step *current;
     t_step *next;
-
+    if(!log)
+        return;
     current= log->head;
     while (current) {
         next= current->next;
@@ -79,8 +80,9 @@ void print_log(t_log *log)
     
     while (current) 
     {
-        ft_printf("%s\n", current->step);  // Imprime cada paso registrado en el log
+        ft_printf("%s ", current->step);  
         current = current->next;
     }
+    ft_printf("\n");
     ft_printf("Movements:%d\n",log->count);
 }

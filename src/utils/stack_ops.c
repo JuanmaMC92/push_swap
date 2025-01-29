@@ -15,24 +15,57 @@
 
 t_node *get_last(t_stack *stack)
 {
-    t_node *current; // Empieza desde el nodo superior
+    t_node *current; 
     
     if (!stack || !stack->top)
-        return NULL;    // Si la pila está vacía, retorna NULL
+        return NULL;    
     current = stack->top;
-    while (current->next) {       // Recorre hasta el último nodo
+    while (current->next) {       
         current = current->next;
     }
-    return current;               // Retorna el último nodo
+    return current;               
 }
 
 t_node *get_second_last(t_stack *stack)
 {
-    t_node *current; // Empieza desde el nodo superior
+    t_node *current; 
     if (!stack || !stack->top) 
-        return NULL; // Si no hay al menos dos nodos, retorna NULL
+        return NULL; 
     current = stack->top;
-    while (current->next && current->next->next) // Recorre hasta el penúltimo nodo
+    while (current->next && current->next->next) 
             current=current->next;
-    return current; // Retorna el penúltimo nodo
+    return current; 
+}
+int locate(t_stack *stack,int index)
+{
+    t_node *current;
+    int pos;
+    current=stack->top;
+    pos=0;
+    while(current)
+    {
+        if(current->index==index)
+            break;
+        pos++;
+        current=current->next;
+    }
+    return pos;
+}
+int near_high(t_stack *stack,int target)
+{
+    int near;
+    int diff;
+    int index;
+    t_node *current;
+    current=stack->top;
+    near=max_index(stack);
+    while (current)
+    {
+        index=current->index;
+        diff=index-target;
+        if(diff>0 && near>index)
+            near=index; 
+        current=current->next;
+    }
+    return near;
 }

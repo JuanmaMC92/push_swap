@@ -31,7 +31,7 @@ int pop(t_stack *stack)
     t_node *temp ;
     int value;
     if (stack->size == 0)
-        return -1; // Error: stack vacío
+        return -1; 
     
     temp = stack->top;
     value = temp->value;
@@ -45,10 +45,10 @@ void    pa(t_stack *a, t_stack *b,t_log *log)
     int index;
     int value;
     if (b->size == 0)
-        return; // No se puede hacer push si `b` está vacío
+        return; 
     index=b->top->index;
-    value = pop(b); // Sacamos el primer elemento de `b`
-    push(a, value,index);     // Lo metemos en `a`
+    value = pop(b); 
+    push(a, value,index);     
     if (log)
         add_step(log,"pa");
     else
@@ -63,10 +63,10 @@ void    pb(t_stack *a, t_stack *b,t_log *log)
     int index;
     int value;
     if (a->size == 0)
-        return; // No se puede hacer push si `a` está vacío
+        return; 
     index=a->top->index;
-    value = pop(a); // Sacamos el primer elemento de `a`
-    push(b, value,index);     // Lo metemos en `b`
+    value = pop(a); 
+    push(b, value,index);     
     if (log)
         add_step(log,"pb");
     else

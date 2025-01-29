@@ -21,91 +21,56 @@ int *stack2array(t_stack *stack)
     int *array;
     t_node *current;
     if (!stack || stack->size == 0)
-        return NULL; // Devuelve NULL si la pila está vacía o no existe
+        return NULL; 
 
     array = malloc(stack->size * sizeof(int));
     if (!array)
-        return NULL; // Devuelve NULL si la memoria no pudo ser asignada
+        return NULL; 
 
     current = stack->top;
     i=0;
     while(i<stack->size)
     {
-        array[i] = current->value; // Copia el valor del nodo actual al arreglo
+        array[i] = current->value; 
         current = current->next; 
         i++;
     }
 
-    return array; // Devuelve el arreglo
+    return array; 
 }
-
-void quicksort(int *array, int size)
+int partition(int *array, int size)
 {
     int pivot;
-    int i; 
-    int j;
-    int temp; 
-    int partition_index; // Declarar todas las variables al inicio
+    int i;                 
+    int j;                  
+    int temp;
 
-    if (size < 2)
-        return; // Caso base: si el tamaño es 1 o menos, ya está ordenado
-
-    pivot = array[size - 1]; // Elegir el pivote
-    i = -1;                  // Inicializar índice para los elementos menores
-    j = 0;                   // Inicializar índice para iterar el arreglo
-
-    while (j < size - 1) { // Iterar por los elementos antes del pivote
+    pivot = array[size - 1];
+    i = -1;
+    j = 0;
+    while (j < size - 1) {
         if (array[j] < pivot) {
             i++;
-            // Intercambiar array[i] y array[j]
             temp = array[i];
             array[i] = array[j];
             array[j] = temp;
         }
         j++;
     }
-
-    // Colocar el pivote en su posición correcta
     temp = array[i + 1];
     array[i + 1] = array[size - 1];
     array[size - 1] = temp;
-
-    partition_index = i + 1;
-
-    // Ordenar recursivamente las dos mitades
-    quicksort(array, partition_index);                  // Izquierda del pivote
-    quicksort(array + partition_index + 1, size - partition_index - 1); // Derecha del pivote
-    for (int i = 0; i < size; i++) {
-        printf("%d ", array[i]);
-    }
-    printf("\n");
+    return i + 1;
 }
-
-void map_stack(t_stack *stack)
+void quicksort(int *array, int size)
 {
-    int *array;
-    int i;
-    t_node *current;
-    array=stack2array(stack);
-    quicksort(array,stack->size);
-    if(array)
-    {   
-        current=stack->top;
-        while(current)
-        {
-            i=0;
-            while(i < stack->size)
-            {    
-                if(current->value==array[i])
-                {
-                    current->index =i;
-                    ft_printf("%d - %d \n",current->value,current->index);
-                    break;
-                }
-                i++;
-            }
-            current=current->next;
-        }
-    }
-    free(array);
+    int part_index; 
+
+    if (size < 2)
+        return; 
+    part_index = partition(array, size);
+    quicksort(array, part_index);
+    quicksort(array + part_index + 1, size - part_index - 1); 
 }
+
+

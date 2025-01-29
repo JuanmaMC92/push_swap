@@ -18,7 +18,7 @@ t_stack *create_stack()
     t_stack *stack = malloc(sizeof(t_stack));
     if (!stack){
         ft_printf("Error: Could not allocate memory for stack\n");
-        return NULL; // Manejo de error
+        return NULL; 
     }
     stack->top = NULL;
     stack->size = 0;
@@ -36,7 +36,7 @@ void    free_stack(t_stack *stack)
     free(stack);
 }
 
-void print_stack(t_stack *stack) 
+void print_stack(t_stack *stack)
 {
     t_node *current;
     current = stack->top;
@@ -46,6 +46,7 @@ void print_stack(t_stack *stack)
         current = current->next;
     }
 }
+
 void print_stacks(t_stack *a,t_stack *b)
 {
     

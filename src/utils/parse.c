@@ -12,18 +12,43 @@
 
 #include "../../includes/push_swap.h"
 
-int parse_arguments(int argc, char *argv[], t_stack *stack)
+int intake(int argc, char **args, t_stack *stack)
+{
+    int i;
+    char **data;
+
+    if (argc==1)
+            return(ft_printf("No input\n"),0);
+    if (argc==2)
+        data=ft_split(args[1],' ');
+    else
+    {
+        data = (char **)malloc((argc - 1) * sizeof(char *));
+        i=0;
+        while(i<argc-1){
+            data[i]=ft_strdup(args[i+1]);
+            i++;
+        }
+        data[argc - 1] = NULL; 
+    }       
+    return stack_transfer(data,stack);
+}
+
+int stack_transfer(char **args, t_stack *stack)
 {
     int i;
     int num;
-    for (i = 1; i < argc; i++)
+    i=0;
+    while(args[i])
     {
-        if (!is_integer(argv[i]))  // Verifica si el argumento es un número entero
+        if (!is_integer(args[i]))  
             return 0;
-        num = ft_atoi(argv[i]);
-        if (is_duplicate(stack, num))  // Verifica si el número ya existe en el stack
+        num = ft_atoi(args[i]);
+        
+        if (num > INT_MAX || num  < INT_MIN ||is_duplicate(stack, num))  
             return 0;
-        push(stack, num,0);  // Agrega el número al stack
+        push(stack, num,0);  
+        i++;
     }
     return 1;
 }
@@ -32,14 +57,14 @@ int is_integer(char *str)
     int i = 0;
 
     if (str[i] == '-' || str[i] == '+')
-        i++;  // Soporta números negativos y positivos
+        i++;  
     while (str[i])
     {
         if (str[i] < '0' || str[i] > '9')
-            return 0;  // No es un número entero
+            return 0;  
         i++;
     }
-    return 1;  // Es un número entero válido
+    return 1;  
 }
 
 int is_duplicate(t_stack *stack, int num)
@@ -56,15 +81,4 @@ int is_duplicate(t_stack *stack, int num)
         current = current->next;  
     }
     return 0;
-}
-void codestop()
-{
-    char c;
-    printf("---Stop--\n");
-    
-    // Espera hasta que se presione Enter (codigo de tecla '\n')
-    do {
-        c = getchar();
-    } while (c != '\n');
-    return;
 }

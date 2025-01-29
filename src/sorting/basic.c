@@ -15,54 +15,83 @@
 int is_sorted(t_stack *stack)
 {
     t_node *current;
-    map_stack(stack);
 
-    if (!stack || stack->size <= 1) // Si el stack está vacío o tiene un solo elemento
+    if (!stack || stack->size <= 1) 
         return 1;
 
     current = stack->top;
     while (current && current->next)
     {
-        if (current->index> current->next->index)
-            return 0; // Encontró un desorden, no está ordenado
+        if (current->index > current->next->index)
+            return (ft_printf("Node:%d(%d) > Next: %d (%d)\n",current->value,current->index,current->next->value,current->next->index),0); 
         current = current->next;
     }
-    return 1; // Está completamente ordenado
+    return 1; 
 }
 void sort_stack(t_stack *a, t_stack *b,t_log *log)
 {
-    while(!is_sorted(a))
+    if(!is_sorted(a) && a->size>1)
         stack_sort(a,b,log);
     print_log(log);
-    ft_printf("Sorted:\n");
+    ft_printf("<<%s>>\n",is_sorted(a)?"Sorted successfully":"Unable to sort");
     print_stack(a);
     ft_printf("|A\n");
 }
 void stack_sort(t_stack *a, t_stack *b,t_log *log)
 {
-    ///Main sorting algorithm
-    if(a->size>3)
-        radix_sort(a,b,log);
-    else
+    
+    if (a->size==2)
+        sa(a,b,log);
+    else if (a->size<4)
         sort_three(a,b,log);
+    
+    else if (a->size<6)
+        sort_five(a,b,log);
+    
+    else
+        proc_btoa(a,b,log);
 }
 void sort_three(t_stack *a,t_stack *b,t_log *log)
 {
-    t_node *current;
-    t_node *last;
+    int head;
+    int next;
+    int last;
     
-    while(!is_sorted(a))
-    {    
-        current = a->top;
-        last = current->next;
-        while (last->next)
-            last = last->next;
-        if (current->value > current->next->value)
-                sa(a, b, log);
-        else if (last->value < current->value)
-                rra(a, b, log);
-        else 
-                ra(a, b, log);
-    }
 
+    while(!is_sorted(a))
+    {
+        head=a->top->index;
+        next=a->top->next->index;
+        last=get_last(a)->index;
+        if(head>next)
+        {
+            if(head>last)
+                ra(a,b,log);
+            else
+                sa(a,b,log);
+        }
+        else
+            rra(a,b,log);
+    }
+}
+void sort_five(t_stack *a, t_stack *b, t_log *log)
+{
+    int i;
+    ft_printf("Sort-five Strategy-%d\n",a->size);
+    while (a->size > 3) 
+    {
+        ft_printf("Top item:%d(%d)\n",a->top->value,a->top->index);
+        if (a->top->index ==min_index(a))
+            pb(a, b, log); 
+        else
+            ra(a, b, log); 
+        
+    }
+    sort_three(a, b, log); 
+    ft_printf("A sorted, return from B\n");
+    if(is_sorted(b))
+        sb(a, b, log); 
+    i=2;
+    while(i--)
+        pa(a, b, log); 
 }

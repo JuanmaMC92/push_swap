@@ -13,38 +13,30 @@
 
 #include "../includes/push_swap.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char **args)
 {
     t_stack *stack_a;
     t_stack *stack_b;
     t_log *log;
     log=init_log();
+    
     stack_a=create_stack();
-    stack_b=create_stack();
-    
-    // Comprobar si no hay argumentos
-    if (argc == 1)
-        return 0;
-    
-    // Verificar y cargar los argumentos en el stack_a
-    if (!parse_arguments(argc, argv, stack_a))
+    if(!intake(argc,args,stack_a))
     {
-        write(2, "Error\n", 6);  // Escribir mensaje de error en stderr
+        free_stack(stack_a);
+        clean_log(log);
+        write(2, "Error\n", 6);
         return 1;
     }
+    map_stack(stack_a);
+    if(!is_sorted(stack_a))
+    {
+        stack_b=create_stack();
+        sort_stack(stack_a, stack_b,log);
+        free_stack(stack_b);
 
-    // Ejecutar algoritmo para ordenar stack_a
-    if (is_sorted(stack_a))
-        return 0;  // Si ya está ordenado, no hacer nada
-
-    // En este ejemplo, llamamos a una función que optimiza las operaciones.
-    // Podrías desarrollar tu propio algoritmo de ordenación aquí.
-    sort_stack(stack_a, stack_b,log);
-    
-    
-    // Liberar memoria de los stacks
+    }
     free_stack(stack_a);
-    free_stack(stack_b);
-    
+    clean_log(log);
     return 0;
 }

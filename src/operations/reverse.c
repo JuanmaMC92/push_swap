@@ -16,24 +16,24 @@ void reverse(t_stack *stack)
     t_node *last;
     t_node *second_last;
 
-    // Si la pila tiene menos de 2 elementos, no se necesita hacer nada
+    
     if (stack->size < 2)
         return;
 
     last = stack->top;
-    // Encontramos el último nodo
+    
     while (last->next)
         last = last->next;
 
     second_last = stack->top;
-    // Encontramos el penúltimo nodo
+    
     while (second_last->next != last)
         second_last = second_last->next;
 
-    // Ahora, hacemos que el penúltimo nodo apunte a NULL (se convierte en el último nodo)
+    
     second_last->next = NULL;
 
-    // El último nodo se convierte en el primer nodo
+    
     last->next = stack->top;
     stack->top = last;
 }
