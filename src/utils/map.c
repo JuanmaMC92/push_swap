@@ -76,3 +76,19 @@ int min_index(t_stack *stack)
     return min;
 
 }
+int mean_index(t_stack *stack)
+{
+    int sum;
+    int count;
+    t_node *current;
+    current=stack->top;
+    sum=0;
+    count=0;
+    while(current)
+    {
+        sum+=current->index;
+        count++;
+        current=current->next;
+    }
+    return (ft_printf("Mean:%d\n",sum/count),sum/count);
+}

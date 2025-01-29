@@ -36,3 +36,36 @@ t_node *get_second_last(t_stack *stack)
             current=current->next;
     return current; // Retorna el penúltimo nodo
 }
+int locate(t_stack *stack,int index)
+{
+    t_node *current;
+    int pos;
+    current=stack->top;
+    pos=0;
+    while(current)
+    {
+        if(current->index==index)
+            break;
+        pos++;
+        current=current->next;
+    }
+    return pos;
+}
+int near_high(t_stack *stack,int target)
+{
+    int near;
+    int diff;
+    int index;
+    t_node *current;
+    current=stack->top;
+    near=max_index(stack);
+    while (current)
+    {
+        index=current->index;
+        diff=index-target;
+        if(diff>0 && near>index)
+            near=index; 
+        current=current->next;
+    }
+    return near;
+}

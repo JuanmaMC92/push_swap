@@ -4,8 +4,7 @@
 # include <stdio.h>     // Para funciones de depuración (printf, etc.), si es necesario
 # include <stdlib.h>    // Para malloc, free, exit
 # include <unistd.h>    // Para write
-# include <stdbool.h>   // Para valores booleanos (true/false)
-# include <limits.h>    // Para valores INT_MIN y INT_MAX
+# include <limits.h>
 # include "../libft/libft.h" 
 
 // Estructura para los nodos de la pila
@@ -55,7 +54,6 @@ void    rotate(t_stack *stack);
 void    reverse(t_stack *stack);
 void    print_stack(t_stack *stack);
 void    print_stacks(t_stack *a, t_stack *b);
-int parse_arguments(int argc, char *argv[], t_stack *stack);
 int is_duplicate(t_stack *stack, int num);
 int is_integer(char *str);
 t_log *init_log();
@@ -76,35 +74,7 @@ int partition(int *array, int size);
 void map_stack(t_stack *stack);
 int max_index(t_stack *stack);
 int min_index(t_stack *stack);
-int max_idx(t_stack *stack);
-void chunk_split(t_stack *a, t_stack *b,t_log *log ,int chunk_size);
-void chunk_merge(t_stack *a, t_stack *b,t_log *log);
-void chunk_sort(t_stack *a, t_stack *b,t_log *log);
-void proc_chunk_radix(t_stack *a, t_stack *b,t_log *log);
-void proc_best_friend(t_stack *a,t_stack *b,t_log *log);
 int mean_index(t_stack *stack);
-void exec_best(t_stack *a,t_stack *b,t_log *log,int index);
-void next_rotation(t_stack *a,t_stack *b,t_log *log,int pos_a,int pos_b);
-int next_index(t_stack *a,t_stack *b);
-int nearest_index(t_stack *stack,int index);
-int find_position(t_stack *stack,int index);
-int moves_to_top(t_stack *stack,int pos);
-//Bits
-int get_bit(int number, int position);
-int get_bits(int number, int position, int count);
-int get_max_bits(t_stack *stack);
-int bit_count(int number);
-int stackrem(t_stack *stack,int position, int bit);
-//Optimization
-void radix_sort(t_stack *a,t_stack *b,t_log *log);
-void proc_radix(t_stack *a,t_stack*b,t_log *log);
-void proc_radix_2bits(t_stack *a, t_stack *b, t_log *log);
-void proc_2bit_radix(t_stack *a, t_stack *b, t_log *log);
-void radix_btoa(t_stack *a,t_stack *b,t_log *log,int bit);
-void sync_rot(t_stack *a,t_stack *b,t_log *log,int dir);
-int opt_rot(t_stack *a,int position);
-int best_rotation(t_stack *stack,int position, int bit,int higher);
-int prepare_next(t_stack *stack,int ascending);
 void proc_btoa(t_stack *a, t_stack *b, t_log *log);
 void exec_btoa(t_stack *a,t_stack *b,t_log *log,int target,int link);
 int near_high(t_stack *stack,int target);
@@ -113,20 +83,5 @@ int locate(t_stack *stack,int index);
 int nxt_btoa(t_stack *a,t_stack *b);
 int btoa_ops(t_stack *a,t_stack *b,int link,int target);
 
-
-//A-to-B
-void atob(t_stack *a , t_stack *b, t_log *log,int bit);
-void btoa(t_stack *a , t_stack *b, t_log *log);
-int prep_atob(t_stack *a , t_stack *b, t_log *log,int bit);
-int best_atob(t_stack *a ,int bit);
-void push_atob(t_stack *a , t_stack *b, t_log *log,int bit);
-void codestop();
-
-
-/*
-// Funciones de ordenamiento
-void    sort_small(t_stack *a, t_stack *b); // Ordenar para menos de 5 elementos
-void    sort_large(t_stack *a, t_stack *b); // Ordenar para muchos elementos
-*/
 
 #endif

@@ -49,10 +49,6 @@ void stack_sort(t_stack *a, t_stack *b,t_log *log)
         sort_five(a,b,log);
     
     else
-        //proc_stack(a,b,log);
-        //proc_radix(a,b,log);
-        //proc_radix_2bits(a,b,log);
-        //proc_chunk_radix(a,b,log);
         proc_btoa(a,b,log);
 }
 void sort_three(t_stack *a,t_stack *b,t_log *log)

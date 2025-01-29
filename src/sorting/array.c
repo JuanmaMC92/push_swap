@@ -36,54 +36,41 @@ int *stack2array(t_stack *stack)
         i++;
     }
 
-    return array; // Devuelve el arreglo
+    return array; 
 }
-
 int partition(int *array, int size)
 {
     int pivot;
-    int i;                  // Índice para los elementos menores
-    int j;                   // Índice para recorrer el arreglo
+    int i;                 
+    int j;                  
     int temp;
-    pivot = array[size - 1]; // Elegir el pivote
+
+    pivot = array[size - 1];
     i = -1;
     j = 0;
-    // Mover los elementos menores que el pivote al lado izquierdo
     while (j < size - 1) {
         if (array[j] < pivot) {
             i++;
-            // Intercambiar array[i] y array[j]
             temp = array[i];
             array[i] = array[j];
             array[j] = temp;
         }
         j++;
     }
-
-    // Colocar el pivote en su lugar correcto
     temp = array[i + 1];
     array[i + 1] = array[size - 1];
     array[size - 1] = temp;
-    return i + 1; // Retorna el índice del pivote
+    return i + 1;
 }
 void quicksort(int *array, int size)
 {
-    int part_index; // Declarar todas las variables al inicio
+    int part_index; 
 
     if (size < 2)
-        return; // Caso base: si el tamaño es 1 o menos, ya está ordenado
-    // Dividir el arreglo y obtener el índice del pivote
+        return; 
     part_index = partition(array, size);
-
-    // Ordenar recursivamente las dos mitades
-    quicksort(array, part_index);                  // Izquierda del pivote
-    quicksort(array + part_index + 1, size - part_index - 1); // Derecha del pivote
-    /*
-    for (int i = 0; i < size; i++) {
-        printf("%d ", array[i]);
-    }
-    printf("\n");
-    */
+    quicksort(array, part_index);
+    quicksort(array + part_index + 1, size - part_index - 1); 
 }
 
 
