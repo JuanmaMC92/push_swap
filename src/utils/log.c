@@ -80,7 +80,7 @@ void print_log(t_log *log)
     
     while (current) 
     {
-        ft_printf("%s ", current->step);  // Imprime cada paso registrado en el log
+        ft_printf("%s ", current->step);  
         current = current->next;
     }
     ft_printf("\n");

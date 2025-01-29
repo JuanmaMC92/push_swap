@@ -21,17 +21,17 @@ int *stack2array(t_stack *stack)
     int *array;
     t_node *current;
     if (!stack || stack->size == 0)
-        return NULL; // Devuelve NULL si la pila está vacía o no existe
+        return NULL; 
 
     array = malloc(stack->size * sizeof(int));
     if (!array)
-        return NULL; // Devuelve NULL si la memoria no pudo ser asignada
+        return NULL; 
 
     current = stack->top;
     i=0;
     while(i<stack->size)
     {
-        array[i] = current->value; // Copia el valor del nodo actual al arreglo
+        array[i] = current->value; 
         current = current->next; 
         i++;
     }

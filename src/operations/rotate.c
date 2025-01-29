@@ -17,24 +17,24 @@ void rotate(t_stack *stack)
     t_node *first;
     t_node *last;
 
-    // Si la pila tiene menos de 2 elementos, no hace falta rotar
+    
     if (stack->size < 2)
         return;
 
     first = stack->top;
     last = stack->top;
 
-    // Encontrar el último nodo
+    
     while (last->next)
         last = last->next;
 
-    // Hacer que el último nodo apunte al primero
+    
     last->next = first;
 
-    // El primer nodo pasa a ser el segundo, actualizando el puntero top
+    
     stack->top = first->next;
 
-    // El antiguo primer nodo se convierte en el último, así que su next es NULL
+    
     first->next = NULL;
 }
 

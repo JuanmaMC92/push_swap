@@ -30,7 +30,7 @@ void map_stack(t_stack *stack)
                 if(current->value==array[i])
                 {
                     current->index =i;
-                    ft_printf("%d - %d \n",current->value,current->index);//Debug, to remove
+                    ft_printf("%d - %d \n",current->value,current->index);
                     break;
                 }
                 i++;

@@ -16,14 +16,14 @@ void swap(t_stack *stack)
     t_node *first ;
     t_node *second;
     if (stack->size < 2)
-        return; // No se puede hacer swap si hay menos de 2 elementos
+        return; 
 
     first= stack->top;
     second = first->next;
 
     first->next = second->next;
     second->next = first;
-    stack->top = second; // El segundo nodo ahora es el "top"
+    stack->top = second; 
 }
 void sa(t_stack *a, t_stack *b,t_log *log)
 {

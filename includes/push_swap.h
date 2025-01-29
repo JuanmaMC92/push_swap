@@ -1,16 +1,16 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <stdio.h>     // Para funciones de depuración (printf, etc.), si es necesario
-# include <stdlib.h>    // Para malloc, free, exit
-# include <unistd.h>    // Para write
+# include <stdio.h>     
+# include <stdlib.h>    
+# include <unistd.h>    
 # include <limits.h>
 # include "../libft/libft.h" 
 
-// Estructura para los nodos de la pila
+
 typedef struct s_node {
-    int value;                 // Valor del nodo
-    struct s_node *next;       // Puntero al siguiente nodo
+    int value;                 
+    struct s_node *next;       
     int index;
 } t_node;
 
@@ -23,26 +23,26 @@ typedef struct s_log {
     int count;                 
     t_step *head;       
 } t_log;
-// Estructura para la pila
+
 typedef struct s_stack {
-    t_node *top;               // Puntero al elemento superior de la pila
-    int size;                  // Tamaño actual de la pila
+    t_node *top;               
+    int size;                  
 } t_stack;
 
-// Operatios
-void    sa(t_stack *a, t_stack *b,t_log *log);        // Swap para la pila A
-void    sb(t_stack *a, t_stack *b,t_log *log);        // Swap para la pila B
-void    ss(t_stack *a, t_stack *b,t_log *log); // Swap simultáneo
-void    pa(t_stack *a, t_stack *b,t_log *log); // Push desde B a A
-void    pb(t_stack *a, t_stack *b,t_log *log); // Push desde A a B
-void    ra(t_stack *a, t_stack *b,t_log *log);        // Rotate A
-void    rb(t_stack *a, t_stack *b,t_log *log);        // Rotate B
-void    rr(t_stack *a, t_stack *b,t_log *log); // Rotate simultáneo
-void    rra(t_stack *a, t_stack *b,t_log *log);       // Reverse Rotate A
-void    rrb(t_stack *a, t_stack *b,t_log *log);       // Reverse Rotate B
-void    rrr(t_stack *a, t_stack *b,t_log *log); // Reverse Rotate simultáneo
 
-// Utils
+void    sa(t_stack *a, t_stack *b,t_log *log);        
+void    sb(t_stack *a, t_stack *b,t_log *log);        
+void    ss(t_stack *a, t_stack *b,t_log *log); 
+void    pa(t_stack *a, t_stack *b,t_log *log); 
+void    pb(t_stack *a, t_stack *b,t_log *log); 
+void    ra(t_stack *a, t_stack *b,t_log *log);        
+void    rb(t_stack *a, t_stack *b,t_log *log);        
+void    rr(t_stack *a, t_stack *b,t_log *log); 
+void    rra(t_stack *a, t_stack *b,t_log *log);       
+void    rrb(t_stack *a, t_stack *b,t_log *log);       
+void    rrr(t_stack *a, t_stack *b,t_log *log); 
+
+
 t_stack *create_stack(void);
 t_node *get_second_last(t_stack *stack);
 t_node *get_last(t_stack *stack);  
@@ -62,7 +62,7 @@ void add_step(t_log *log, char *step);
 void print_log(t_log *log);
 int intake (int argc, char **args, t_stack *stack);
 int stack_transfer(char **args, t_stack *stack);
-// Sorting
+
 int is_sorted(t_stack *stack); 
 void sort_stack(t_stack *a, t_stack *b,t_log *log);
 void stack_sort(t_stack *a, t_stack *b,t_log *log);

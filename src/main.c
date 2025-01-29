@@ -19,9 +19,8 @@ int main(int argc, char **args)
     t_stack *stack_b;
     t_log *log;
     log=init_log();
-    //log=NULL;
-    stack_a=create_stack();
     
+    stack_a=create_stack();
     if(!intake(argc,args,stack_a))
     {
         free_stack(stack_a);

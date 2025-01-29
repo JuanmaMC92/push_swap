@@ -29,7 +29,7 @@ int intake(int argc, char **args, t_stack *stack)
             data[i]=ft_strdup(args[i+1]);
             i++;
         }
-        data[argc - 1] = NULL; // Asegurar que el array termine con NULL
+        data[argc - 1] = NULL; 
     }       
     return stack_transfer(data,stack);
 }
@@ -41,13 +41,13 @@ int stack_transfer(char **args, t_stack *stack)
     i=0;
     while(args[i])
     {
-        if (!is_integer(args[i]))  // Verifica si el argumento es un número entero
+        if (!is_integer(args[i]))  
             return 0;
         num = ft_atoi(args[i]);
         
-        if (num > INT_MAX || num  < INT_MIN ||is_duplicate(stack, num))  // Verifica si el número ya existe en el stack
+        if (num > INT_MAX || num  < INT_MIN ||is_duplicate(stack, num))  
             return 0;
-        push(stack, num,0);  // Agrega el número al stack
+        push(stack, num,0);  
         i++;
     }
     return 1;
@@ -57,14 +57,14 @@ int is_integer(char *str)
     int i = 0;
 
     if (str[i] == '-' || str[i] == '+')
-        i++;  // Soporta números negativos y positivos
+        i++;  
     while (str[i])
     {
         if (str[i] < '0' || str[i] > '9')
-            return 0;  // No es un número entero
+            return 0;  
         i++;
     }
-    return 1;  // Es un número entero válido
+    return 1;  
 }
 
 int is_duplicate(t_stack *stack, int num)
