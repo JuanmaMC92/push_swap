@@ -23,7 +23,7 @@ int is_sorted(t_stack *stack)
     while (current && current->next)
     {
         if (current->index > current->next->index)
-            return (ft_printf("Node:%d(%d) > Next: %d (%d)\n",current->value,current->index,current->next->value,current->next->index),0); 
+            return (0); 
         current = current->next;
     }
     return 1; 
@@ -77,10 +77,8 @@ void sort_three(t_stack *a,t_stack *b,t_log *log)
 void sort_five(t_stack *a, t_stack *b, t_log *log)
 {
     int i;
-    ft_printf("Sort-five Strategy-%d\n",a->size);
     while (a->size > 3) 
     {
-        ft_printf("Top item:%d(%d)\n",a->top->value,a->top->index);
         if (a->top->index ==min_index(a))
             pb(a, b, log); 
         else
@@ -88,7 +86,6 @@ void sort_five(t_stack *a, t_stack *b, t_log *log)
         
     }
     sort_three(a, b, log); 
-    ft_printf("A sorted, return from B\n");
     if(is_sorted(b))
         sb(a, b, log); 
     i=2;

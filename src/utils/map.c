@@ -30,7 +30,6 @@ void map_stack(t_stack *stack)
                 if(current->value==array[i])
                 {
                     current->index =i;
-                    ft_printf("%d - %d \n",current->value,current->index);
                     break;
                 }
                 i++;
@@ -90,5 +89,5 @@ int mean_index(t_stack *stack)
         count++;
         current=current->next;
     }
-    return (ft_printf("Mean:%d\n",sum/count),sum/count);
+    return (sum/count);
 }
