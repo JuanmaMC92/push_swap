@@ -11,57 +11,54 @@
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
-void proc_btoa(t_stack *a,t_stack *b,t_log *log)
+void proc_btoa(t_stacksys *stacks)
 {
     int link;
     int nxt;
-    while(a->size>5)
+    while(stacks->a->size>5)
     {
-        link=mean_index(a);   
-        nxt=a->top->index;
+        link=mean_index(stacks->a);   
+        nxt=stacks->a->top->index;
         if(nxt<link)
-            pb(a,b,log);
+            pb(stacks->a,stacks->b,stacks->log);
         else
-            ra(a,b,log);
+            ra(stacks->a,stacks->b,stacks->log);
     }
-    sort_five(a,b,log);
-    while(b->size>0)
+    sort_five(stacks->a,stacks->b,stacks->log);
+    while(stacks->b->size>0)
     {
-        nxt=nxt_btoa(a,b);
-        link=near_high(a,nxt);
-        exec_btoa(a,b,log,nxt,link);
+        nxt=nxt_btoa(stacks);
+        link=near_high(stacks->a,nxt);
+        exec_btoa(stacks,nxt,link);
     }
-    while (a->top->index!=0)
+    while (stacks->a->top->index!=0)
     {
-        if(moves2top(a,0)>0)
-            ra(a,b,log);
+        if(moves2top(stacks->a,0)>0)
+            ra(stacks->a,stacks->b,stacks->log);
         else
-            rra(a,b,log);
+            rra(stacks->a,stacks->b,stacks->log);
     }
 }
-void exec_btoa(t_stack *a,t_stack *b,t_log *log,int target,int link)
+void exec_btoa(t_stacksys *stacks,int target,int link)
 {
     int rem_a;
     int rem_b;
     int sync;
 
-    while(moves2top(a,link)!=0 || moves2top(b,target)!=0)
+    while(moves2top(stacks->a,link)!=0 || moves2top(stacks->b,target)!=0)
     {
         
-        rem_a=moves2top(a,link);
-        rem_b=moves2top(b,target);
+        rem_a=moves2top(stacks->a,link);
+        rem_b=moves2top(stacks->b,target);
         sync=((rem_a>0 && rem_b>0) || (rem_a<0 && rem_b<0));
+
         if(sync)
-        {
-            sync=rem_a>0?(rr(a,b,log),0):(rrr(a,b,log),1);
-            continue;
-        }
-        if(rem_a)
-            rem_a=rem_a>0?(ra(a,b,log),0):(rra(a,b,log),1);
-        if(rem_b)
-            rem_b=rem_b>0?(rb(a,b,log),0):(rrb(a,b,log),1);
+            sync_rotate(stacks,rem_a);
+        else
+            btoa_step(stacks,rem_a,rem_b);
     }
-    pa(a,b,log);
+    pa(stacks->a,stacks->b,stacks->log);
+
 }
 
 
@@ -77,26 +74,25 @@ int moves2top(t_stack *stack,int target)
         dist=pos-stack->size;
     return dist;
 }
-int nxt_btoa(t_stack *a,t_stack *b)
+int nxt_btoa(t_stacksys *stacks)
 {
-    t_node *current;
     int nxt;
     int link;
     int cost;
     int delta;
-    current=b->top;
-    nxt=current->index;
-    cost=(a->size+b->size)/2;
-    while(current)
+    stacks->head=stacks->b->top;
+    nxt=stacks->head->index;
+    cost=(stacks->a->size+stacks->b->size)/2;
+    while(stacks->head)
     {
-        link=near_high(a,current->index);
-        delta=btoa_ops(a,b,link,current->index);
+        link=near_high(stacks->a,stacks->head->index);
+        delta=btoa_ops(stacks->a,stacks->b,link,stacks->head->index);
         if(delta<cost)
         {
             cost=delta;
-            nxt=current->index;
+            nxt=stacks->head->index;
         }
-        current=current->next;
+        stacks->head=stacks->head->next;
     }
     return nxt;
 }

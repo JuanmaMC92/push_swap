@@ -28,28 +28,28 @@ int is_sorted(t_stack *stack)
     }
     return 1; 
 }
-void sort_stack(t_stack *a, t_stack *b,t_log *log)
+void sort_stack(t_stacksys *stacks)
 {
-    if(!is_sorted(a) && a->size>1)
-        stack_sort(a,b,log);
-    print_log(log);
-    ft_printf("<<%s>>\n",is_sorted(a)?"Sorted successfully":"Unable to sort");
-    print_stack(a);
+    if(!is_sorted(stacks->a) && stacks->a->size>1)
+        stack_sort(stacks);
+    print_log(stacks->log);
+    ft_printf("<<%s>>\n",is_sorted(stacks->a)?"Sorted successfully":"Unable to sort");
+    print_stack(stacks->a);
     ft_printf("|A\n");
 }
-void stack_sort(t_stack *a, t_stack *b,t_log *log)
+void stack_sort(t_stacksys *stacks)
 {
     
-    if (a->size==2)
-        sa(a,b,log);
-    else if (a->size<4)
-        sort_three(a,b,log);
+    if (stacks->a->size==2)
+        sa(stacks->a,stacks->b,stacks->log);
+    else if (stacks->a->size<4)
+        sort_three(stacks->a,stacks->b,stacks->log);
     
-    else if (a->size<6)
-        sort_five(a,b,log);
+    else if (stacks->a->size<6)
+        sort_five(stacks->a,stacks->b,stacks->log);
     
     else
-        proc_btoa(a,b,log);
+        proc_btoa(stacks);
 }
 void sort_three(t_stack *a,t_stack *b,t_log *log)
 {

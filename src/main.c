@@ -15,28 +15,20 @@
 
 int main(int argc, char **args)
 {
-    t_stack *stack_a;
-    t_stack *stack_b;
-    t_log *log;
-    log=init_log();
-    
-    stack_a=create_stack();
-    if(!intake(argc,args,stack_a))
+    t_stacksys *stacks;
+    stacks=setup_stacks(2);
+    if(!intake(argc,args,stacks->a))
     {
-        free_stack(stack_a);
-        clean_log(log);
+        clean_stacks(stacks);
         write(2, "Error\n", 6);
         return 1;
     }
-    map_stack(stack_a);
-    if(!is_sorted(stack_a))
+    map_stack(stacks->a);
+    if(!is_sorted(stacks->a))
     {
-        stack_b=create_stack();
-        sort_stack(stack_a, stack_b,log);
-        free_stack(stack_b);
+        sort_stack(stacks);
 
     }
-    free_stack(stack_a);
-    clean_log(log);
+    clean_stacks(stacks);
     return 0;
 }

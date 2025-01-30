@@ -29,6 +29,13 @@ typedef struct s_stack {
     int size;                  
 } t_stack;
 
+typedef struct t_stacksys {
+    t_stack *a;
+    t_stack *b;
+    t_log   *log;
+    t_node *head;
+} t_stacksys;
+
 
 void    sa(t_stack *a, t_stack *b,t_log *log);        
 void    sb(t_stack *a, t_stack *b,t_log *log);        
@@ -64,8 +71,8 @@ int intake (int argc, char **args, t_stack *stack);
 int stack_transfer(char **args, t_stack *stack);
 
 int is_sorted(t_stack *stack); 
-void sort_stack(t_stack *a, t_stack *b,t_log *log);
-void stack_sort(t_stack *a, t_stack *b,t_log *log);
+void sort_stack(t_stacksys *stacks);
+void stack_sort(t_stacksys *stacks);
 void sort_three(t_stack *a,t_stack *b,t_log *log);
 void sort_five(t_stack *a, t_stack *b, t_log *log);
 int *stack2array(t_stack *stack);
@@ -75,13 +82,16 @@ void map_stack(t_stack *stack);
 int max_index(t_stack *stack);
 int min_index(t_stack *stack);
 int mean_index(t_stack *stack);
-void proc_btoa(t_stack *a, t_stack *b, t_log *log);
-void exec_btoa(t_stack *a,t_stack *b,t_log *log,int target,int link);
+void proc_btoa(t_stacksys *stacks);
+void exec_btoa(t_stacksys *stacks,int target,int link);
 int near_high(t_stack *stack,int target);
 int moves2top(t_stack *stack,int target);
 int locate(t_stack *stack,int index);
-int nxt_btoa(t_stack *a,t_stack *b);
+int nxt_btoa(t_stacksys *stacks);
 int btoa_ops(t_stack *a,t_stack *b,int link,int target);
-
+void clean_stacks(t_stacksys *sys);
+t_stacksys *setup_stacks(int mode);
+void sync_rotate(t_stacksys *stacks,int dir);
+void btoa_step(t_stacksys *stacks,int rem_a,int rem_b);
 
 #endif
